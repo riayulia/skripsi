@@ -1,0 +1,33 @@
+{% extends "main.html" %}
+{% block main %}
+{% load staticfiles %}
+    <!-- Page Heading -->
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">
+                            Menu <!--<small>Statistics Overview</small>-->
+                        </h1>
+                    </div>
+                </div>
+			<!-- /.row -->
+    <div class="row">
+        <div class="col-lg-12">
+            <ul >
+	  {% for group in user.groups.all %}
+             {% if group.name == 'admin' %}
+				<li>
+					<a href="{% url 'all-produk'  %}">Daftar Produk</a>
+				</li>
+		   
+		   
+             {% elif group.name == 'customer'  %}
+				<li>
+					<a href="{% url 'transaksi'  %}"> Daftar Menu </a>
+				</li>
+		   {% endif %}
+           {% endfor %}
+			</ul>
+        </div>
+    </div>
+{% endblock %}

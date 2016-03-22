@@ -1,0 +1,67 @@
+{% extends "main.html" %}
+{% block main %}
+{% load staticfiles %}
+    <!-- Page Heading -->
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">
+                            Pesan <!--<small>Statistics Overview</small>-->
+                        </h1>
+                    </div>
+                </div>
+			<!-- /.row -->
+    <div class="row">
+        <div class="col-lg-12">
+              <div class="table-responsive">
+                       {% if pesan %}
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Nama Produk</th>
+					<th>Nama Customer</th>
+                                        <th>Jumlah Pesanan</th>
+                                        <th>Penyajian</th>
+                                        <th>Catatan</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                {% for daftar_pesanan in pesanan %}
+                                    <tr>
+                                        <td>{{ produk.kategori }}</td>
+                                        <td>
+					{% for group in user.groups.all %}
+			             		{% if group.name == 'admin' %}
+
+						<a href="{% url 'edit-produk' produk.id %}">{{ produk.nama_produk }}</a>
+						{% else %}
+							{{ produk.nama_produk }}
+						{% endif %}
+
+					{% endfor %}
+
+					</td>
+                                        <td>{{ produk.deskripsi }}</td>
+                                        <td>{{ produk.harga }}</td>
+                                        <td>{{ produk.keterangan }}</td>
+                                        <td>{{ produk.gambar }}</td>
+                                    </tr>
+                                {% endfor %}
+				</tbody>
+                            </table>
+                            {% else %}
+                                <strong>No produk inputted yet.</strong>
+                            {% endif %}
+		{% for group in user.groups.all %}
+             		{% if group.name == 'admin' %}
+			  <a href="{% url 'input-produk' %}"><button class="btn btn-danger"> Input Produk </button></a>
+			{% endif %}
+		{% endfor %}
+                                
+                        </div>
+
+        </div>
+    </div>
+
+{% endblock %}

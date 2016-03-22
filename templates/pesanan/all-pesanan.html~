@@ -1,0 +1,48 @@
+{% extends "main.html" %}
+{% block main %}
+{% load staticfiles %}
+    <!-- Page Heading -->
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">
+                            Daftar Pesanan <!--<small>Statistics Overview</small>-->
+                        </h1>
+                    </div>
+                </div>
+			<!-- /.row -->
+    <div class="row">
+        <div class="col-lg-12">
+              <div class="table-responsive">
+                       {% if pesanan %}
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Nama Produk</th>
+                                        <th>Jumlah Pesanan</th>
+                                        <th>Penyajian</th>
+                                        <th>Catatan</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                {% for pesanan in pesanan %}
+                                    <tr>
+					<td>{{ pesanan.nama_produk }}</td>
+                                        <td>{{ pesanan.jum_pesanan }}</td>
+                                        <td>{{ produk.penyajian }}</td>
+                                        <td>{{ produk.catatan }}</td>
+                                    </tr>
+                                {% endfor %}
+				</tbody>
+                            </table>
+                            {% else %}
+                                <strong>No produk inputted yet.</strong>
+                            {% endif %}
+                                
+                        </div>
+
+        </div>
+    </div>
+
+{% endblock %}
